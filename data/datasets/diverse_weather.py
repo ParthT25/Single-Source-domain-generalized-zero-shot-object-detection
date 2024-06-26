@@ -12,7 +12,7 @@ from pymage_size import get_image_size
 from detectron2.data import DatasetCatalog, MetadataCatalog
 from detectron2.structures import BoxMode   
 
-all_class_name = ['bus','car','bike', 'motor', 'person', 'rider' ,'truck']
+all_class_name = ['car','bike', 'motor', 'person', 'rider' ,'truck']
 delt = {}
 def get_annotation(root, image_id, ind):
     annotation_file = os.path.join(root,'VOC2007', "Annotations", "%s.xml" % image_id)
