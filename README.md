@@ -24,4 +24,8 @@ Set the environment variable DETECTRON2_DATASETS to the parent folder of the dat
 
 ```
 Download [Diverse Weather](https://drive.google.com/drive/folders/1IIUnUrJrvFgPzU8D6KtV0CXa8k1eBV9B)
+We train our models on a single A100 GPU.
+```
+    python train.py --config-file configs/diverse_weather.yaml
+'''
 
