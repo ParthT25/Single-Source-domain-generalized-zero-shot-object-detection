@@ -237,43 +237,6 @@ class ClipRes5ROIHeadsAttn(ClipRes5ROIHeads):
         else:
             pred_instances, _ = self.box_predictor.inference(predictions, proposals)
             pred_instances = self.forward_with_given_boxes(features, pred_instances)
-            # boxes = pred_instances[0]._fields['pred_boxes'].tensor.cpu().numpy()
-            # global id
-            # name = mapp[id]
-            # id += 1
-            # image_path = f"/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/data/datasets/diverseWeather/daytime_clear/VOC2007/JPEGImages/{name}.jpg"
-            # image = cv2.imread(image_path)
-            # image = cv2.resize(image,(1067,600))     
-            # i = 0 
-            # for box in boxes:
-            #     if pred_instances[0]._fields['pred_classes'][i].item() == 0 and pred_instances[0]._fields['scores'][i].item() >= 0.5:
-            #         cv2.rectangle(image, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0, 255, 0), 2)
-            #     i += 1
-            # cv2.imwrite(f'{name}_rslt.jpg',image)
-            # for x in range(_[0].__len__()):
-            #         if rois.__len__() >= 6*cnt:
-            #             break
-            #         if pred_instances[0]._fields['scores'].detach().cpu()[x] >= 0.5 and count[classes[pred_instances[0]._fields['pred_classes'].detach().cpu()[x].item()]] >= 1:
-            #             rois.append(box_features[_[0][x]].detach().cpu().numpy())
-            #             labels.append(classes[pred_instances[0]._fields['pred_classes'].detach().cpu()[x].item()])
-            #             count[classes[pred_instances[0]._fields['pred_classes'].detach().cpu()[x].item()]] -= 1
-            # import numpy as np
-            # global id
-            # boxes = pred_instances[0]._fields['pred_boxes'].tensor.cpu().numpy()
-            # pred_classes = pred_instances[0]._fields['pred_classes'].cpu().numpy()
-            # pred_classes = pred_classes.reshape(pred_classes.__len__(),1)
-            # boxes = np.hstack((boxes,pred_classes))
-            # xml_file = "/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/data/datasets/diverseWeather/daytime_clear/VOC2007/Annotations/" + map[f'{id}'] + '.xml'
-            # ground_truth_boxes = parse_voc_xml_with_classes(xml_file)
-            # valid_predictions = filter_predictions(boxes, ground_truth_boxes)
-            # # print(valid_predictions)
-            # id += 1
-            # box_features = box_features[_[0]]
-            # print(pred_instances)
-            # for x in valid_predictions:
-            #     rois.append(box_features[x].detach().cpu().numpy())
-            #     labels.append(classes[pred_instances[0]._fields['pred_classes'].detach().cpu()[x].item()])
-            #     count[classes[pred_instances[0]._fields['pred_classes'].detach().cpu()[x].item()]]
             return pred_instances, {},box_features[_[0]]
 
 
