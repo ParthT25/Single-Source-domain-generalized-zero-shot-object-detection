@@ -23,94 +23,9 @@ import os
 
 import xml.etree.ElementTree as ET
 cnt = 3000
-# classes = {0 : 'car',1 : 'bike',2 : 'motor',3 : 'person', 4 : 'rider',5 : 'truck'}
-# count = {'car' : cnt,'truck' : cnt,'rider' : cnt, 'person' : cnt, 'bike' : cnt,'motor' : cnt,'background' : cnt}
-# reversed_classes = {v: k for k, v in classes.items()}
 classes = {0: 'bus',1 : 'car',2 : 'bike',3 : 'motor',4 : 'person', 5 : 'rider',6 : 'truck'}
 count = {'car' : cnt,'truck' : cnt,'rider' : cnt, 'person' : cnt, 'bike' : cnt,'motor' : cnt}
 reversed_classes = {v: k for k, v in classes.items()}
-mapp = {
-    0: "mist-180",
-    1: "haze-053",
-    2: "mist-043",
-    3: "target_bremen_000012_000019_leftImg8bit_foggy_beta_0.02",
-    4: "target_cologne_000136_000019_leftImg8bit_foggy_beta_0.02",
-    5: "target_erfurt_000036_000019_leftImg8bit_foggy_beta_0.02",
-    6: "target_hanover_000000_056361_leftImg8bit_foggy_beta_0.02",
-    7: "target_hamburg_000000_074545_leftImg8bit_foggy_beta_0.02",
-    8: "3dbba701-943ecd2a",
-    9: "943a830f-faccdf0b",
-    10: "c9a41ce3-bd04c1ae",
-    11: "654a7c91-7755a110",
-    12: "6ff53593-c731f623",
-    13: "bc5bcfab-07883191",
-    14: "c5b29044-75af49f0",
-    15: "c306625b-dfc8a05f",
-    16: "98f94b41-c60beae7",
-    17: "501ecab9-0acf9038",
-    18: "33036b70-e0c63674",
-    19: "345fe518-30e94fb2",
-    20: "35dd5b30-1c62f72d",
-    21: "b9332578-307665bc",
-    22: "4c0dee56-c311cb85",
-    23: "rain_storm-901",
-    24: "0c774f7d-a8305951",
-    25: "5b5ec103-739c42df",
-    26: "fe172415-3c36f3d1",
-    27: "60199d1b-892d798f",
-    28: "7e36ad82-8b14d8e3",
-    29: "8ba5037d-f25a2a51",
-    30: "9dfe708f-7302806b",
-    31: "c2bcd344-ee1fa1cf",
-    32: "0725b3e1-9e3a1eee",
-    33: "04c49cc4-f994251e",
-    34: "1e5658e1-1b46d458",
-    35: "mist-148",
-    36: "foggy-036",
-    37: "mist-027",
-    38: "mist-067",
-    39: "mist-111",
-    40: "mist-074",
-    41: "haze-096",
-    42: "haze-119",
-    43: "3c683c38-03dec112",
-    44: "40ee3b4e-51afae01",
-    45: "4e20e077-db383da3",
-    46: "54983c6b-7d66aa0c",
-    47: "6b4d4888-2fd6066c",
-    48: "a4c90864-f59300ed",
-    49: "a8f8805a-af96959c",
-    50: "b7234188-8102b743",
-    51: "18cac65b-c84970d8",
-    52: "22c302a8-e0eff66d",
-    53: "3da75143-9b1c5eb3",
-    54: "49ce932b-63dd62c7",
-    55: "59d556ec-cffeccfa",
-    56: "5ee342bd-f369de8a",
-    57: "5f0b5c6f-9ed3d1eb",
-    58: "6a0d6cfd-e28fa477",
-    59: "025bff9b-cd0b388b",
-    60: "0ca79ef3-eabeec85",
-    61: "0e3aa963-62742b1c",
-    62: "10035541-5dc5b2fe",
-    63: "16cad9f9-670cbde4",
-    64: "19991ad4-75026cc9",
-    65: "1bd85bec-b2504293",
-    66: "1cc81e2d-0abbbc44",
-    67: "4f4592c1-6dc0f65d",
-    68: "target_monchengladbach_000000_018114_leftImg8bit_foggy_beta_0.02",
-    69: "foggy-018",
-    70: "target_zurich_000119_000019_leftImg8bit_foggy_beta_0.02",
-    71: "09057268-409c12ee",
-    72: "71d19092-a89b5001",
-    73: "72c1a1b3-7c164896",
-    74: "6fd8c9e3-b7954450",
-    75: "rain_storm-019",
-    76: "c124e51c-52e077cb",
-    77: "62f8a87a-b4fa9969",
-    78: "6461e9dc-878ec17f",
-    79: "672e029d-f3b84c60"
-}
 rois = []
 labels = []
 id = 0
@@ -323,27 +238,6 @@ class ClipRCNNWithClipBackbone(GeneralizedRCNN):
             assert not torch.jit.is_scripting(), "Scripting is not supported for postprocess."
 
             allresults = GeneralizedRCNN._postprocess(results, batched_inputs, images.image_sizes)
-            boxes = allresults[0]['instances'].pred_boxes.tensor.detach().cpu().numpy()
-            pred_classes = allresults[0]['instances'].pred_classes.detach().cpu().numpy()
-            pred_classes = pred_classes.reshape(pred_classes.__len__(),1)
-            pred_classes = pred_classes.astype(np.int64)
-            boxes = np.hstack((boxes,pred_classes))
-            global id1
-            name = mapp[id1]
-            id1 += 1
-            image_path = f"/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/data/datasets/diverseWeather/Custom_dataset/VOC2007/JPEGImages/{name}.jpg"
-            xml_file = "/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/data/datasets/diverseWeather/Custom_dataset/VOC2007/Annotations/" + name + '.xml'
-            ground_truth_boxes = parse_voc_xml_with_classes(xml_file)
-            image = cv2.imread(image_path)
-            valid_predictions,bg = filter_predictions(boxes, ground_truth_boxes)
-            # image = cv2.resize(image,(1067,600))     
-            for x in valid_predictions:
-                box = boxes[int(x)]
-                if box[4] != 0:
-                    continue
-                cv2.rectangle(image, (int(box[0]), int(box[1])), (int(box[2]), int(box[3])), (0, 255, 0), 2)
-                print('Hello')
-            cv2.imwrite(f'/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/op/{name}_SSD-DGOD.jpg',image)
             # -------------------------------------------------------------------------------------------------------------------------------------
             # import numpy as np
             # global id
@@ -374,7 +268,7 @@ class ClipRCNNWithClipBackbone(GeneralizedRCNN):
             #         rois.append(box_features[x].detach().cpu().numpy())
             #         labels.append('background')
             #         count['background'] -= 1
-            # print(count)
+            # -------------------------------------------------------------------------------------------------------------------------------------
             return allresults
         else:
             return results
