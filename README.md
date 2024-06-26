@@ -49,6 +49,7 @@ Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention
   cd WC-DCGAN
   python train.py
   python generate.py
+  python retrain_clip_attn.py
   ```
 Run the code in evaluation mode using the finetuned model
    ```sh
