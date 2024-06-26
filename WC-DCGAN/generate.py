@@ -29,7 +29,7 @@ gen = Generator(z_dim,channels_img,Features_gen,Image_size,Gen_embedding).to(dev
 
 
 bus_emb = []
-model_path = '/u/student/2022/cs22mtech14005/Thesis1/GAN/cc.en.300.bin'
+model_path = 'WC-DCGAN/cc.en.300.bin'
 fasttext.util.download_model('en', if_exists='ignore')
 
 # Load the downloaded model
@@ -39,7 +39,7 @@ ft = fasttext.load_model(model_path)
 words = ft.get_words()
 
 
-gen_weights_path = '/u/student/2022/cs22mtech14005/Thesis1/GAN/generator_model.pth'
+gen_weights_path = 'WC-DCGAN/generator_model.pth'
 gen_state_dict = torch.load(gen_weights_path)
 gen.load_state_dict(gen_state_dict)
 gen.eval()
