@@ -29,3 +29,10 @@ We train our models on a single A100 GPU.
     python train.py --config-file configs/diverse_weather.yaml
 ```
 
+After Training follow these steps
+```
+    here https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/configs/diverse_weather.yaml#L31 edit the value from 6 to 7
+    here https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/data/datasets/diverse_weather.py#L15 add bus class in the array
+    Remove commented out code https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/modeling/meta_arch.py#L241-L271 and https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/modeling/meta_arch.py#L241-L271
+```
+
