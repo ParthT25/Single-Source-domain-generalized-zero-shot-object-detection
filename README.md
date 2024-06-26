@@ -27,5 +27,5 @@ Download [Diverse Weather](https://drive.google.com/drive/folders/1IIUnUrJrvFgPz
 We train our models on a single A100 GPU.
 ```
     python train.py --config-file configs/diverse_weather.yaml
-'''
+```
 
