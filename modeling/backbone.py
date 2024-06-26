@@ -45,9 +45,9 @@ class ClipRN101(Backbone):
         x = self.enc.layer1(x)
         x = self.enc.layer2(x)
         x = self.enc.layer3(x)
-        if random.uniform(0, 1) > 0.4:
-            y = random.sample(([2,3,4,6,13]),1)
-            x = x + offsets[y[0]].unsqueeze(0).mean(dim=(2,3),keepdims=True)
+        # if random.uniform(0, 1) > 0.4:
+        #     y = random.sample(([2,3,4,6,13]),1)
+        #     x = x + offsets[y[0]].unsqueeze(0).mean(dim=(2,3),keepdims=True)
         return {"res4": x}
 
 
