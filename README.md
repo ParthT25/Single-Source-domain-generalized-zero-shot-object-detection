@@ -23,4 +23,4 @@ Set the environment variable DETECTRON2_DATASETS to the parent folder of the dat
         /VOC2012 
 
 ```
-Download [Diverse Weather](https://github.com/AmingWu/Single-DGOD)
+Download [Diverse Weather](https://drive.google.com/drive/folders/1IIUnUrJrvFgPzU8D6KtV0CXa8k1eBV9B)]
