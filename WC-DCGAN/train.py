@@ -35,7 +35,7 @@ model, preprocess = clip.load("RN101", device=device)
 model.eval()
 
 model1 = CombinedModel().to(device)
-pretrained_weights_path = '/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/all_outs/diverse_weather/model_best.pth'
+pretrained_weights_path = 'domaingen/all_outs/diverse_weather/model_best.pth'
 pretrained_state_dict = torch.load(pretrained_weights_path)
 model1.attention_pooling.k_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.k_proj.bias'],dtype=torch.float16).to(device)
 model1.attention_pooling.c_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.c_proj.bias'],dtype=torch.float16).to(device)
@@ -57,7 +57,7 @@ class_mapping = {class_label: index for index, class_label in enumerate(classes)
 encoder = OneHotEncoder(sparse=False, categories='auto')
 
 
-model_path = '/u/student/2022/cs22mtech14005/Thesis1/GAN/cc.en.300.bin'
+model_path = 'WC-DCGAN/cc.en.300.bin'
 ft = fasttext.load_model(model_path)
 words = ft.get_words()
 
@@ -65,21 +65,10 @@ words = ft.get_words()
 with open(file_name, 'w') as op_file:
     print('Reading ROIs Data',file = op_file,flush=True)
     print('Reading ROIs Data')
-    with open('/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/rois_file_final.pkl', 'rb') as file:
+    with open('domaingen/rois_file_final.pkl', 'rb') as file:
         rois = pickle.load(file)
-    with open('/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/labels_file_final.pkl', 'rb') as file:
+    with open('domaingen/labels_file_final.pkl', 'rb') as file:
         labels = pickle.load(file) 
-    # rois1 = []
-    # labels1 = []
-    # num = 2500    
-    # count = {'car' : num,'truck' : num,'rider' : num, 'person' : num, 'bike' : num,'motor' : num,'background' : num}
-    # for i in range(rois.__len__()):
-    #     if count[labels[i]] >= 1:
-    #         rois1.append(rois[i])
-    #         labels1.append(labels[i])
-    #         count[labels[i]] -= 1
-    # rois = rois1
-    # labels = labels1
     print('--------------------------------------------------------')
     print(f'Training WC-DCGAN on {rois.__len__()} instances of ROIs')
     print(f'Training WC-DCGAN on {rois.__len__()} instances of ROIs',file=op_file,flush=True)
@@ -300,4 +289,4 @@ with open('bus_loss.pkl', 'wb') as file:
 with open('mode_loss.pkl', 'wb') as file:
     pickle.dump(mode_ep, file)
 torch.save(critic.state_dict(), 'critic_model.pth')
-torch.save(gen.state_dict(), 'generator_model_of.pth')
+torch.save(gen.state_dict(), 'generator_model.pth')
