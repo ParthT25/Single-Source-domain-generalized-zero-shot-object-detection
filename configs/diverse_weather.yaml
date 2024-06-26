@@ -1,7 +1,7 @@
 BASE_YAML: "COCO-Detection/faster_rcnn_R_101_C4_3x.yaml"
 DATASETS:
         TRAIN: ("daytime_clear_train",)
-        TEST: ("daytime_clear_test",)
+        TEST: ("daytime_clear_train",)
 DATALOADER:
         NUM_WORKERS: 16
 INPUT:
