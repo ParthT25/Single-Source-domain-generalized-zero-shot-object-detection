@@ -1,4 +1,4 @@
-"# Single-Source-domain-generalized-object-detection" 
+# Single-Source-domain-generalized-object-detection
 
 ### Installation
 Our code is based on [Detectron2](https://github.com/facebookresearch/detectron2) and requires python >= 3.6
