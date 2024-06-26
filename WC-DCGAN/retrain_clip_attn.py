@@ -28,7 +28,7 @@ classes = ['car','bus', 'rider', 'truck', 'bike', 'person', 'motor']
 class_mapping = {class_label: index for index, class_label in enumerate(classes)}
 
 
-pretrained_weights_path = '/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/all_outs/diverse_weather/model_best.pth'
+pretrained_weights_path = 'domaingen/all_outs/diverse_weather/model_best.pth'
 pretrained_state_dict = torch.load(pretrained_weights_path)
 model.visual.attnpool.k_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.k_proj.bias'],dtype=torch.float16).to(device)
 model.visual.attnpool.c_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.c_proj.bias'],dtype=torch.float16).to(device)
@@ -60,7 +60,7 @@ for i in range(rois.__len__()):
 rois = rois1
 labels = labels1
 
-model_path = '/u/student/2022/cs22mtech14005/Thesis1/GAN/cc.en.300.bin'
+model_path = 'WC-DCGAN/cc.en.300.bin'
 ft = fasttext.load_model(model_path)
 
 # Get the word vectors
@@ -127,4 +127,4 @@ pretrained_state_dict['model']['roi_heads.clip_im_predictor.visual_enc.attnpool.
 pretrained_state_dict['model']['roi_heads.clip_im_predictor.visual_enc.attnpool.positional_embedding'] = model.visual.attnpool.positional_embedding.data
 print('--------------------------------------------------------------------------------')
 print('Saving...')
-torch.save(pretrained_state_dict, 'updated_clipattn_vani.pth')
+torch.save(pretrained_state_dict, 'updated_clipattn.pth')
