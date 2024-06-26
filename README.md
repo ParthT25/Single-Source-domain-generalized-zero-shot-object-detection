@@ -44,13 +44,13 @@ Follow these steps:
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS all_outs/diverse_weather/model_best.pth
    ```
-5.Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention pooling layer:
+Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention pooling layer:
   ```sh
   cd WC-DCGAN
   python train.py
   python generate.py
   ```
-6. Run the code in evaluation mode using the finetuned model
+Run the code in evaluation mode using the finetuned model
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS WC-DCGAN/updated_clipattn.pth
    ```
