@@ -22,9 +22,9 @@ import numpy as np
 import os
 
 import xml.etree.ElementTree as ET
-cnt = 3000
-classes = {0: 'bus',1 : 'car',2 : 'bike',3 : 'motor',4 : 'person', 5 : 'rider',6 : 'truck'}
-count = {'car' : cnt,'truck' : cnt,'rider' : cnt, 'person' : cnt, 'bike' : cnt,'motor' : cnt}
+cnt = 1000
+classes = {0 : 'car',1 : 'bike',2 : 'motor',3 : 'person', 4 : 'rider',5 : 'truck',6 : 'background'}
+count = {'car' : cnt,'truck' : cnt,'rider' : cnt, 'person' : cnt, 'bike' : cnt,'motor' : cnt, 'background' : cnt}
 reversed_classes = {v: k for k, v in classes.items()}
 rois = []
 labels = []
@@ -73,8 +73,7 @@ def calculate_iou(box1, box2):
 
     iou = inter_area / float(box1_area + box2_area - inter_area)
     return iou
-def filter_predictions(predictions, ground_truth_boxes, iou_threshold=0.5):
-    max_iou = [(0,-1)] * ground_truth_boxes.__len__()
+def filter_predictions(predictions, ground_truth_boxes, iou_threshold=0.65):
     valid_predictions = []
     bg = []
     i = 0
@@ -86,12 +85,9 @@ def filter_predictions(predictions, ground_truth_boxes, iou_threshold=0.5):
             gt_box = ground_truth_boxes[j]
             if pred_box[4] == reversed_classes[gt_box[4]]:  # Check if the class labels match
                 iou = calculate_iou(pred_box, gt_box)
-                if iou >= iou_threshold and max_iou[j][0] < iou:
+                if iou >= iou_threshold:
                     cnt += 1
                     valid_predictions.append(str(i))
-                    if max_iou[j][1] != -1:
-                        valid_predictions.remove(max_iou[j][1])
-                    max_iou[j] = (iou,str(i))
                     flag = False
                     break
                 else:
@@ -250,7 +246,7 @@ class ClipRCNNWithClipBackbone(GeneralizedRCNN):
             # while map_img[f'{id}'] in delt:
             #     id += 1
             #     print("Found")
-            # xml_file = "/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/data/datasets/diverseWeather/daytime_clear/VOC2007/Annotations/" + map_img[f'{id}'] + '.xml'
+            # xml_file = "/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/data/datasets/diverseWeather/daytime_clear/VOC2007/Annotations/" + map_img[f'{id}'] + '.xml'
             # ground_truth_boxes = parse_voc_xml_with_classes(xml_file)
             # valid_predictions,bg = filter_predictions(boxes, ground_truth_boxes)
             # # print(valid_predictions)
@@ -268,6 +264,7 @@ class ClipRCNNWithClipBackbone(GeneralizedRCNN):
             #         rois.append(box_features[x].detach().cpu().numpy())
             #         labels.append('background')
             #         count['background'] -= 1
+            # print(count)
             # -------------------------------------------------------------------------------------------------------------------------------------
             return allresults
         else:
@@ -543,16 +540,9 @@ class ClipRCNNWithClipBackboneWithOffsetGenTrainableVOC(ClipRCNNWithClipBackbone
         return losses
 
 def save():
-    print('SAVE CALLED')
+    # print('SAVE CALLED')
     # with open('rois_file_final.pkl', 'wb') as file:
     #     pickle.dump(rois, file)
     # with open('labels_file_final.pkl', 'wb') as file:
     #     pickle.dump(labels, file)
     pass
-
-
-
-
-
-
-
