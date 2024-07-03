@@ -10,6 +10,10 @@ pip install -r requirements.txt
 
 Install Detectron2 from here [Detectron2](https://detectron2.readthedocs.io/en/latest/tutorials/install.html)
 
+Set dataset path for Detectron2 
+```
+DETECTRON2_DATASETS=/path/to/datasets
+```
 ### Datasets
 Set the environment variable DETECTRON2_DATASETS to the parent folder of the datasets
 
