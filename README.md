@@ -44,7 +44,7 @@ Follow these steps:
 
 3. Remove the commented-out code in the `modeling/meta_arch.py` file:
    - From lines [241 to 271](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/4d986b70f0c9fea48db8ae30cc107d7adc35ecd1/modeling/meta_arch.py#L238-L267]).
-   - From lines [547 to 550](https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/modeling/meta_arch.py#L547-L550).
+   - From lines [547 to 550](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/1ce7f3beff4c63b70c65048ad14f266e8c663890/modeling/meta_arch.py#L543-L547).
 
 4. Run the code in evaluation mode:
    ```sh
