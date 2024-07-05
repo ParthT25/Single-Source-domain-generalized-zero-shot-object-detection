@@ -1,5 +1,5 @@
 import sys
-detectron2_path = '/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/detectron2'
+detectron2_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/detectron2'
 sys.path.append(detectron2_path)
 
 from cgi import parse_multipart
@@ -30,6 +30,7 @@ from detectron2.data.samplers import InferenceSampler
 from detectron2.utils.events import  get_event_storage
 
 from detectron2.utils import comm
+import torch.nn.functional as F
 from detectron2.evaluation import COCOEvaluator, verify_results, inference_on_dataset, print_csv_format
 
 from detectron2.solver import LRMultiplier
