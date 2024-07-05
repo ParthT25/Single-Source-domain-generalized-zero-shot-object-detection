@@ -48,7 +48,7 @@ Follow these steps:
 
 4. Run the code in evaluation mode:
    ```sh
-   python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS all_outs/diverse_weather/model_best.pth
+   python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_best.pth
    ```
 Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention pooling layer:
   ```sh
@@ -59,5 +59,5 @@ Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention
   ```
 Run the code in evaluation mode using the finetuned model
    ```sh
-   python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS WC-DCGAN/updated_clipattn.pth
+   python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/Models/updated_clipattn.pth
    ```
