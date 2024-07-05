@@ -11,7 +11,7 @@ import torch.nn.functional as F
 from custom import CombinedModel,CustomDataset,custom_one_hot_encode
 warnings.filterwarnings("ignore")
 
-device = "cuda:6"
+device = "cuda:0"
 model, preprocess = clip.load("RN101", device=device)
 model.transformer.requires_grad = False
 model.visual.requires_grad = False
@@ -21,14 +21,14 @@ model.visual.attnpool.requires_grad = True
 Learning_rate = 0.0001
 Gen_embedding = 196
 Num_epochs = 5
-Batch_size = 160
+Batch_size = 200
 
 
 classes = ['car','bus', 'rider', 'truck', 'bike', 'person', 'motor']
 class_mapping = {class_label: index for index, class_label in enumerate(classes)}
 
 
-pretrained_weights_path = 'domaingen/all_outs/diverse_weather/model_best.pth'
+pretrained_weights_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_final.pth'
 pretrained_state_dict = torch.load(pretrained_weights_path)
 model.visual.attnpool.k_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.k_proj.bias'],dtype=torch.float16).to(device)
 model.visual.attnpool.c_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.c_proj.bias'],dtype=torch.float16).to(device)
@@ -43,11 +43,11 @@ opt = torch.optim.SGD(model.visual.parameters(),lr=Learning_rate)
 model.train()    
 
 # print('Reading Data....')
-with open('/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/rois_file_final.pkl', 'rb') as file:
+with open('/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/rois_file_final.pkl', 'rb') as file:
     rois = pickle.load(file)
-with open('/u/student/2022/cs22mtech14005/Thesis1/zs2/domaingen/labels_file_final.pkl', 'rb') as file:
+with open('/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/labels_file_final.pkl', 'rb') as file:
     labels = pickle.load(file)  
-with open('bus_emb_of.pkl', 'rb') as file:
+with open('bus_emb.pkl', 'rb') as file:
     bus_emb = pickle.load(file)
 
 rois1 = []
@@ -60,14 +60,14 @@ for i in range(rois.__len__()):
 rois = rois1
 labels = labels1
 
-model_path = 'WC-DCGAN/cc.en.300.bin'
+model_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/WC-DCGAN/cc.en.300.bin'
 ft = fasttext.load_model(model_path)
 
 # Get the word vectors
 words = ft.get_words()
 
 print(bus_emb[0].shape)
-for i in range(0,int(bus_emb.__len__()/2)):
+for i in range(0,int(bus_emb.__len__())):
     rois.append(bus_emb[i])
     labels.append('bus')
 del bus_emb
@@ -113,7 +113,7 @@ for epoch in range(Num_epochs):
     disc_ep.append(class_loss_ep)
     
 
-with open('retrain_loss.pkl', 'wb') as file:
+with open('loss_files/retrain_loss.pkl', 'wb') as file:
     pickle.dump(disc_ep, file)
 
 pretrained_state_dict['model']['roi_heads.clip_im_predictor.visual_enc.attnpool.k_proj.bias'] = model.visual.attnpool.k_proj.bias.data
@@ -127,4 +127,4 @@ pretrained_state_dict['model']['roi_heads.clip_im_predictor.visual_enc.attnpool.
 pretrained_state_dict['model']['roi_heads.clip_im_predictor.visual_enc.attnpool.positional_embedding'] = model.visual.attnpool.positional_embedding.data
 print('--------------------------------------------------------------------------------')
 print('Saving...')
-torch.save(pretrained_state_dict, 'updated_clipattn.pth')
+torch.save(pretrained_state_dict, '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/Models/updated_clipattn.pth')
