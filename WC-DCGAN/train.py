@@ -19,23 +19,25 @@ Batch_size        = 100
 channels_img      = 1024
 z_dim             = 300
 Gen_embedding     = 300
-Num_epochs        = 32
-critic_iterations = 10
+Num_epochs        = 50
+critic_iterations = 15
 lambda_gp         = 10
 lambda_ce         = 1.0
 lambda_mode       = 0.1
-lambda_bus        = 0.25
+lambda_bus        = 0.5
 thres_ep          = 10
-bus_thresh        = 250
-file_name         = 'output1.txt'
+bus_thresh        = 235
+file_name         = 'logs.txt'
 check = False
     
 
 model, preprocess = clip.load("RN101", device=device)
 model.eval()
 
+
+#Transfering weights
 model1 = CombinedModel().to(device)
-pretrained_weights_path = 'domaingen/all_outs/diverse_weather/model_best.pth'
+pretrained_weights_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_best.pth'
 pretrained_state_dict = torch.load(pretrained_weights_path)
 model1.attention_pooling.k_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.k_proj.bias'],dtype=torch.float16).to(device)
 model1.attention_pooling.c_proj.bias.data = torch.tensor(pretrained_state_dict['model']['backbone.enc.attnpool.c_proj.bias'],dtype=torch.float16).to(device)
@@ -57,7 +59,8 @@ class_mapping = {class_label: index for index, class_label in enumerate(classes)
 encoder = OneHotEncoder(sparse=False, categories='auto')
 
 
-model_path = 'WC-DCGAN/cc.en.300.bin'
+model_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/WC-DCGAN/cc.en.300.bin'
+fasttext.util.download_model('en', if_exists='ignore')
 ft = fasttext.load_model(model_path)
 words = ft.get_words()
 
@@ -65,9 +68,9 @@ words = ft.get_words()
 with open(file_name, 'w') as op_file:
     print('Reading ROIs Data',file = op_file,flush=True)
     print('Reading ROIs Data')
-    with open('domaingen/rois_file_final.pkl', 'rb') as file:
+    with open('/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/rois_file_final.pkl', 'rb') as file:
         rois = pickle.load(file)
-    with open('domaingen/labels_file_final.pkl', 'rb') as file:
+    with open('/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/labels_file_final.pkl', 'rb') as file:
         labels = pickle.load(file) 
     print('--------------------------------------------------------')
     print(f'Training WC-DCGAN on {rois.__len__()} instances of ROIs')
@@ -79,7 +82,6 @@ with open(file_name, 'w') as op_file:
 
     gen = Generator(z_dim,Gen_embedding).to(device)
     critic = Discriminator().to(device)
-    print(gen,file=op_file,flush=True)
 
     initialize_weights(gen)
     initialize_weights(critic)
@@ -278,15 +280,15 @@ with open(file_name, 'w') as op_file:
                     check = True
     print('Saving models and loss histories',file = op_file,flush=True)
     print('Saving models and loss histories')
-with open('disc_loss.pkl', 'wb') as file:
+with open('loss_files/disc_loss.pkl', 'wb') as file:
     pickle.dump(disc_ep, file)
-with open('gen_loss.pkl', 'wb') as file:
+with open('loss_files/gen_loss.pkl', 'wb') as file:
     pickle.dump(gen_ep, file)
-with open('class_loss.pkl', 'wb') as file:
+with open('loss_files/class_loss.pkl', 'wb') as file:
     pickle.dump(class_ep, file)
-with open('bus_loss.pkl', 'wb') as file:
+with open('loss_files/bus_loss.pkl', 'wb') as file:
     pickle.dump(bus_ep, file)
-with open('mode_loss.pkl', 'wb') as file:
+with open('loss_files/mode_loss.pkl', 'wb') as file:
     pickle.dump(mode_ep, file)
 torch.save(critic.state_dict(), 'critic_model.pth')
 torch.save(gen.state_dict(), 'generator_model.pth')
