@@ -23,12 +23,8 @@ Set the environment variable DETECTRON2_DATASETS to the parent folder of the dat
         /diverseWeather
             /daytime_clear
             /daytime_foggy
+            /dusk_rainy
             ...
-        /comic
-        /watercolor
-        /VOC2007
-        /VOC2012 
-
 ```
 
 We train our models on a single A100 GPU.
