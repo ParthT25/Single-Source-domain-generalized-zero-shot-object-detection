@@ -24,12 +24,12 @@ Features_gen = 50
 Features_disc = 100
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-gen = Generator(z_dim,channels_img,Features_gen,Image_size,Gen_embedding).to(device)
+gen = Generator(z_dim,Gen_embedding).to(device)
 
 
 
-bus_emb = []
-model_path = 'WC-DCGAN/cc.en.300.bin'
+bus_emb = []-
+model_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/WC-DCGAN/cc.en.300.bin'
 fasttext.util.download_model('en', if_exists='ignore')
 
 # Load the downloaded model
@@ -39,7 +39,7 @@ ft = fasttext.load_model(model_path)
 words = ft.get_words()
 
 
-gen_weights_path = 'WC-DCGAN/generator_model.pth'
+gen_weights_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/WC-DCGAN/generator_model_mid.pth'
 gen_state_dict = torch.load(gen_weights_path)
 gen.load_state_dict(gen_state_dict)
 gen.eval()
@@ -56,5 +56,3 @@ for i in range(0,80000):
 
 with open('bus_emb.pkl', 'wb') as file:
     pickle.dump(bus_emb, file)
-    
-    
