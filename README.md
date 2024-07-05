@@ -55,6 +55,8 @@ Change the values for the model to enable zero shot learning
 1. Edit the value from 6 to 7 in the `configs/diverse_weather.yaml` file [here](https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/configs/diverse_weather.yaml#L31).
 
 2. Add the `bus` class in the array in the `data/datasets/diverse_weather.py` file [here](https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/data/datasets/diverse_weather.py#L15).
+
+   
 Run the code in evaluation mode using the finetuned model
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/Models/updated_clipattn.pth
