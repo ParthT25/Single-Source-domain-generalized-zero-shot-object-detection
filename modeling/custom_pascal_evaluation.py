@@ -58,12 +58,14 @@ class CustomPascalVOCDetectionEvaluator(PascalVOCDetectionEvaluator):
         ret = OrderedDict()
         mAP = {iou: np.mean(x) for iou, x in aps.items()}
         total = 0
-        for thresh in range(40, 100, 5):
+        for thresh in range(40, 55, 5):
             total += aps[thresh][1]
         print("Average ",total/aps.__len__())
         # clsaps = ','.join(['{:.2f}'.format(a) for a in aps[40]])
         # self._logger.info("AP40")
         # self._logger.info("classwise ap {}".format(clsaps))
+        all_class_name = ['bus','car','bike', 'motor', 'person', 'rider' ,'truck']
+        self._logger.info(all_class_name)
         clsaps = ','.join(['{:.2f}'.format(a) for a in aps[40]])
         self._logger.info("AP40")
         self._logger.info("classwise ap {}".format(clsaps))
@@ -74,5 +76,5 @@ class CustomPascalVOCDetectionEvaluator(PascalVOCDetectionEvaluator):
         self._logger.info("AP50")
         self._logger.info("classwise ap {}".format(clsaps))
 
-        ret["bbox"] = {"AP": np.mean(list(mAP.values())), "AP40": mAP[40], "AP50": mAP[50]}
+        ret["bbox"] = {"mAP40": mAP[40], "mAP45": mAP[45], "mAP50": mAP[50]}
         return ret
