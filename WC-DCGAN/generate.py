@@ -28,7 +28,7 @@ gen = Generator(z_dim,Gen_embedding).to(device)
 
 
 
-bus_emb = []-
+bus_emb = []
 model_path = '/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/WC-DCGAN/cc.en.300.bin'
 fasttext.util.download_model('en', if_exists='ignore')
 
