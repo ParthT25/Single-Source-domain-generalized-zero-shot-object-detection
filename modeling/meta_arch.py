@@ -22,7 +22,7 @@ import numpy as np
 import os
 
 import xml.etree.ElementTree as ET
-cnt = 1000
+cnt = 3000
 classes = {0 : 'car',1 : 'bike',2 : 'motor',3 : 'person', 4 : 'rider',5 : 'truck',6 : 'background'}
 count = {'car' : cnt,'truck' : cnt,'rider' : cnt, 'person' : cnt, 'bike' : cnt,'motor' : cnt, 'background' : cnt}
 reversed_classes = {v: k for k, v in classes.items()}
@@ -73,7 +73,7 @@ def calculate_iou(box1, box2):
 
     iou = inter_area / float(box1_area + box2_area - inter_area)
     return iou
-def filter_predictions(predictions, ground_truth_boxes, iou_threshold=0.65):
+def filter_predictions(predictions, ground_truth_boxes, iou_threshold=0.5):
     valid_predictions = []
     bg = []
     i = 0
