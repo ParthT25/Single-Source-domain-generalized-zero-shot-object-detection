@@ -39,7 +39,7 @@ Follow these steps:
    - From lines [241 to 271](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/4d986b70f0c9fea48db8ae30cc107d7adc35ecd1/modeling/meta_arch.py#L238-L267]).
    - From lines [547 to 550](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/1ce7f3beff4c63b70c65048ad14f266e8c663890/modeling/meta_arch.py#L543-L547).
 2. Please uncomment the code in the `modeling/backbone.py` file.
-   - From line [48 to 51](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/8b45442dd8d8d0d2ebeb225a0be42e9f1ac05fcb/modeling/backbone.py#L48-L50) 
+   - From line [48 to 51](https://github.com/papz2000/Single-Source-domain-generalized-zero-shot-object-detection/blob/8b45442dd8d8d0d2ebeb225a0be42e9f1ac05fcb/modeling/backbone.py#L48-L50).
 3. Run the code in evaluation mode to extract ROI feature maps:
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_best.pth
