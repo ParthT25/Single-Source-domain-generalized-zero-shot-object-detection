@@ -71,7 +71,7 @@ We train our models on a single A100 GPU.
 ## Steps for zero shot learning
 
 1. Run `extraction_setup.py` in Mode 2 to disable feature extraction.
-2. Run `zero_setup_file.py` and write the names of new classes separated by a comma.
+2. Run `zero_shot_setup.py` and write the names of new classes separated by a comma.
     
    
 Run the code in evaluation mode using the finetuned model
