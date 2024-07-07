@@ -32,10 +32,10 @@ We train our models on a single A100 GPU.
     python train.py --config-file configs/diverse_weather.yaml
 ```
 ## After Training
+## Steps
 
+1. Run the `extraction_setup.py` in Mode 1
 
-Follow these steps:
-1)Run the extraction_setup.py in mode 1
 ## Modes
 
 ### Mode 1: Setup for Extraction of ROI Feature Maps
@@ -45,6 +45,7 @@ Follow these steps:
 - Use this mode to prepare the environment for testing the model and to disable ROI feature extraction.
 
 > **Note**: Please disable extraction (Run Mode 2) before testing the model.
+
 
 
 3. Run the code in evaluation mode to extract ROI feature maps:
@@ -64,6 +65,9 @@ Change the values for the model to enable zero shot learning
 
 2. Add the `bus` class in the array in the `data/datasets/diverse_weather.py` file [here](https://github.com/papz2000/Single-Source-domain-generalized-object-detection/blob/5e0a712684367d0523293226f81cb159b29935bd/data/datasets/diverse_weather.py#L15).
 
+Disable the extraction
+ 1. Run extraction_setup_file in mode 2.
+    
    
 Run the code in evaluation mode using the finetuned model
    ```sh
