@@ -60,7 +60,7 @@ Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention
 
 ## Steps for zero shot learning
 
-1. Run the `extraction_setup.py` in Mode 1.
+1. Run the `extraction_setup.py` in Mode 2.
 2. Run `zero_setup_file.py` and write the names of new classes separated by a comma.
     
    
