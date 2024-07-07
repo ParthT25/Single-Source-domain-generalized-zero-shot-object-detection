@@ -238,32 +238,28 @@ class ClipRCNNWithClipBackbone(GeneralizedRCNN):
             # import numpy as np
             # global id
             # boxes = allresults[0]['instances'].pred_boxes.tensor.detach().cpu().numpy()
-            # # print(boxes)
             # pred_classes = allresults[0]['instances'].pred_classes.detach().cpu().numpy()
             # pred_classes = pred_classes.reshape(pred_classes.__len__(),1)
             # pred_classes = pred_classes.astype(np.int64)
             # boxes = np.hstack((boxes,pred_classes))
             # while map_img[f'{id}'] in delt:
-            #     id += 1
-            #     print("Found")
+                # id += 1
+                # print("Found")
             # xml_file = "/u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/data/datasets/diverseWeather/daytime_clear/VOC2007/Annotations/" + map_img[f'{id}'] + '.xml'
             # ground_truth_boxes = parse_voc_xml_with_classes(xml_file)
             # valid_predictions,bg = filter_predictions(boxes, ground_truth_boxes)
-            # # print(valid_predictions)
-            # # print(bg)
             # id += 1
-            # # print(allresults[0]['instances'].pred_classes[0].detach().item())
             # for x in valid_predictions:
-            #     x = int(x)
-            #     if count[classes[allresults[0]['instances'].pred_classes[x].detach().item()]] >= 1:
-            #         rois.append(box_features[x].detach().cpu().numpy())
-            #         labels.append(classes[allresults[0]['instances'].pred_classes[x].detach().item()])
-            #         count[classes[allresults[0]['instances'].pred_classes[x].detach().item()]] -= 1
+                # x = int(x)
+                # if count[classes[allresults[0]['instances'].pred_classes[x].detach().item()]] >= 1:
+                    # rois.append(box_features[x].detach().cpu().numpy())
+                    # labels.append(classes[allresults[0]['instances'].pred_classes[x].detach().item()])
+                    # count[classes[allresults[0]['instances'].pred_classes[x].detach().item()]] -= 1
             # for x in bg:
-            #     if count['background'] >= 1:
-            #         rois.append(box_features[x].detach().cpu().numpy())
-            #         labels.append('background')
-            #         count['background'] -= 1
+                # if count['background'] >= 1:
+                    # rois.append(box_features[x].detach().cpu().numpy())
+                    # labels.append('background')
+                    # count['background'] -= 1
             # print(count)
             # -------------------------------------------------------------------------------------------------------------------------------------
             return allresults
@@ -542,7 +538,7 @@ class ClipRCNNWithClipBackboneWithOffsetGenTrainableVOC(ClipRCNNWithClipBackbone
 def save():
     # print('SAVE CALLED')
     # with open('rois_file_final.pkl', 'wb') as file:
-    #     pickle.dump(rois, file)
+        # pickle.dump(rois, file)
     # with open('labels_file_final.pkl', 'wb') as file:
-    #     pickle.dump(labels, file)
+        # pickle.dump(labels, file)
     pass
