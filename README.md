@@ -36,20 +36,20 @@ We train our models on a single A100 GPU.
 
 1. Run the `extraction_setup.py` in Mode 1
 
-## Modes
+    ### Modes
 
-### Mode 1: Setup for Extraction of ROI Feature Maps
-- Use this mode to set up the environment for extracting Region of Interest (ROI) feature maps.
+    #### Mode 1: Setup for Extraction of ROI Feature Maps
+    - Use this mode to set up the environment for extracting Region of Interest (ROI) feature maps.
 
-### Mode 2: Setup for Testing the Model and Disable ROI Feature Extraction
-- Use this mode to prepare the environment for testing the model and to disable ROI feature extraction.
+    #### Mode 2: Setup for Testing the Model and Disable ROI Feature Extraction
+    - Use this mode to prepare the environment for testing the model and to disable ROI feature extraction.
 
-> **Note**: Please disable extraction (Run Mode 2) before testing the model.
+    > **Note**: Please disable extraction (Run Mode 2) before testing the model.
 
 2. Run the code in evaluation mode to extract ROI feature maps:
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_best.pth
-   ```
+
 Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention pooling layer:
   ```sh
   cd WC-DCGAN
