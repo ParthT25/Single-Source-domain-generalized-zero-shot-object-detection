@@ -50,14 +50,24 @@ We train our models on a single A100 GPU.
    ```sh
    python train.py --eval-only --config-file configs/diverse_weather.yaml MODEL.WEIGHTS /u/student/2022/cs22mtech14005/Single-Source-domain-generalized-zero-shot-object-detection/all_outs/diverse_weather/model_best.pth
 
-Run the WC-DCGAN and generate the unseen class ROIs and fine tune clip attention pooling layer:
-  ```sh
-  cd WC-DCGAN
-  python train.py
-  python generate.py
-  python retrain_clip_attn.py
-  ```
+## Steps for WC-DCGAN
 
+1. Change directory to `WC-DCGAN`:
+   ```sh
+   cd WC-DCGAN
+   ```
+2. Train the WC-DCGAN:
+   ```sh
+   python train.py
+   ```
+3. Generate unseen class ROI feature maps:
+   ```sh
+   python generate.py
+   ```
+4. Fine-tune the CLIP attention pooling layer:
+   ```sh
+   python retrain_clip_attn.py
+   ```
 ## Steps for zero shot learning
 
 1. Run `extraction_setup.py` in Mode 2 to disable feature extraction.
