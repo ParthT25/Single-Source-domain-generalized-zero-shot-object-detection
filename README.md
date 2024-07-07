@@ -34,7 +34,7 @@ We train our models on a single A100 GPU.
 ## After Training
 ## Steps
 
-1. Run the `extraction_setup.py` in Mode 1
+1. Run `extraction_setup.py` in Mode 1
 
     ### Modes
 
